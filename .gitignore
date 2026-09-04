@@ -1,0 +1,31 @@
+# Credentials: never commit real values.
+.env
+.env.*
+!.env.example
+
+# Runtime-only state. The approved portfolio snapshots `sites.db`,
+# `demo_seed.db`, and `.cache-photos/` are intentionally retained.
+.cache/
+.usage.json
+.usage.json.bak
+.killswitch
+backups/
+*.db-shm
+*.db-wal
+
+# Access/runtime logs may contain visitor information.
+*.log
+
+# Python/editor churn.
+__pycache__/
+*.py[cod]
+.DS_Store
+.idea/
+.vscode/
+
+# Local-only scoring overrides may contain proprietary criteria.
+star_criteria.json
+PERFORMANCE_CRITERIA.md
+
+# Candidate-level evidence-run exports are for local audit, not publication.
+benchmarking/runs/

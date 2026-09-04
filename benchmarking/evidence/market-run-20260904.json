@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "run_id": "run-20260904-024050-et",
+  "started_at": "2026-09-04T02:40:50.207024-04:00",
+  "finished_at": "2026-09-04T02:42:54.165069-04:00",
+  "source_provenance": {
+    "publication_note": "The public repository is a clean snapshot. The runner hash and selected AST fingerprints provide limited source comparability; they do not verify the full dependency closure, private inputs, provider responses, or original private commit.",
+    "run_source_files_sha256": {
+      "proxy.py": "3314a966d7b5f7782ed5fb85e5885615c1f6da512a6224dad1abf881e559123f",
+      "tests/test_search.py": "ced139c01216d4f53fe8e9eb74547cb1f73aac1149c2247ce781d1a3761d9ed8",
+      "benchmarking/run_market_evidence.py": "7afd98d3f72df4dcb714d73bd8b5060d8b3d06cc6f97dcfd297f0c25a249fb20"
+    },
+    "run_critical_function_ast_sha256": {
+      "_post_places": "76ff29418c6067fb5c1fce5d24740113cf316527e15039f53cb324d8bd154c1e",
+      "_paginate": "7790151180a4a2f3fde37afc30669651fcc2b75a97e3a2a564edc6674c7787ef",
+      "_adaptive": "8c354050285eddfeab509efbb222319cb62c4943466707561af18393188e8b23",
+      "record_call": "07671d7528d8828fcb65f9211445751c2050252f38a09d2bddb6b4b82c9e4230",
+      "guard": "f4682a83508b2c8411f51e5643875a7d2a1291724623df1d154c8d243cc020ee",
+      "status": "777a8ef3de0b5f8c0815d765a2c796f77e6961949feca9abb89c8dfe2e2c7066",
+      "normalize": "926300b7d05027c8350ac9a9dfb7553fc1a6384d29f0da6d523fed4d20c274fb",
+      "cluster_sites": "f41e4e494a3694b0863a44480120b984afa6037e1f270c3a7a959a2cd7fc5a56",
+      "_merge_group": "881e7245ee53c4a9a92e66656943975bb53e71bdc92fbbda3cdda257b304aa96"
+    }
+  },
+  "design": {
+    "grid": "5 x 5",
+    "center": [34.0522, -118.2437],
+    "spacing_km": 4.5,
+    "radius_m": 2500,
+    "segments": ["smoke", "liquor", "gas", "laundromat", "convenience"],
+    "max_live_calls": 225,
+    "isolated_cache": true,
+    "isolated_usage_ledger": true,
+    "pipeline_writes": false
+  },
+  "result": {
+    "attempted_cells": 21,
+    "complete_cells": 21,
+    "planned_cells": 25,
+    "api_calls": 224,
+    "cloud_console_requests": 224,
+    "cloud_console_error_events": 8,
+    "candidate_observations": 1961,
+    "unique_returned_primary_place_ids": 1856,
+    "cross_cell_repeats": 105,
+    "gross_circle_area_km2": 412.3,
+    "unique_returned_primary_place_ids_per_call": 8.29,
+    "calls_per_gross_km2": 0.543,
+    "cell_latency_median_s": 4.302,
+    "cell_latency_p95_s": 8.16,
+    "maximum_list_price_exposure_usd": 7.84
+  },
+  "qualification": {
+    "ready": 1089,
+    "review_needed": 456,
+    "not_currently_viable": 311
+  },
+  "controls": {
+    "warm_cache_repeats": 4,
+    "warm_cache_digest_matches": 4,
+    "warm_cache_new_api_calls": 0,
+    "manual_category_reviewed": 50,
+    "manual_category_plausible": 48,
+    "manual_category_mismatches": 2
+  },
+  "artifact_hashes_sha256": {
+    "benchmark_results": "50df97809cd2401dc0163cf3ea73770a0ebef31c6c279771056195e3dce349cc",
+    "benchmark_summary": "03a87872d69802d6e6382152acb9acca5fc9aab84e1ef6aab693d9d75848501f",
+    "unique_candidates": "6c690b359af789520f6c8f77439447da8b92a18455d20cd351917091483da4cc",
+    "candidate_observations": "36bedd69f48c7277783a7603cb4c1a7693159a5ec966cb307500244059ee728b",
+    "manual_audit": "b44689d2da948b91be93c12834903593ee67d0eeb8cf57f38e6b1369ae84bb45"
+  },
+  "publication_boundary": "Aggregate evidence only; provider payloads, credentials, and candidate-level exports are not included in the public repository."
+}

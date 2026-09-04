@@ -1,0 +1,80 @@
+name: Verify
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  application:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_MAPS_API_KEY: test-key-not-used
+      MAPS_BROWSER_KEY: test-key-not-used
+      VISIT_LOG: /tmp/atm-map-ci-visits.log
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Run stopped-service suite
+        run: python -m unittest discover -s tests -v
+      - name: Verify completed-run source provenance
+        run: python benchmarking/verify_market_run_source.py
+      - name: Run active-service HTTP boundaries
+        shell: bash
+        run: |
+          python proxy.py >"${RUNNER_TEMP}/proxy.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "${server_pid}" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8093/api/status >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8093/api/status >/dev/null
+          python -m unittest discover -s tests -v
+          kill "${server_pid}"
+          wait "${server_pid}" 2>/dev/null || true
+
+          demo_password="ci-${GITHUB_RUN_ID:-local}"
+          DEMO_USER=ci-user DEMO_PASS="${demo_password}" python proxy.py >"${RUNNER_TEMP}/proxy-protected.log" 2>&1 &
+          server_pid=$!
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8093/healthz >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          test "$(curl --fail --silent http://127.0.0.1:8093/healthz)" = '{"ok": true}'
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:8093/)" = '401'
+          curl --fail --silent --user "ci-user:${demo_password}" http://127.0.0.1:8093/ >/dev/null
+
+  browser:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_MAPS_API_KEY: test-key-not-used
+      MAPS_BROWSER_KEY: test-key-not-used
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Install Playwright
+        run: |
+          python -m pip install playwright==1.62.0
+          python -m playwright install --with-deps chromium
+      - name: Run Search History browser flow
+        run: python tests/browser_search_history.py

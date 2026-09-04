@@ -1,0 +1,28 @@
+{
+ "ChIJMVVdra-4woARcpTpYl8b920": {
+  "id": "ChIJMVVdra-4woARcpTpYl8b920",
+  "created": "2026-08-30T12:51:26",
+  "status": "rejected",
+  "reason": "",
+  "last_contact": "2026-08-30",
+  "name": "24 Hour 76 Car Wash",
+  "address": "800 N Western Ave, Los Angeles, CA 90029, USA",
+  "lat": 34.0847084,
+  "lng": -118.3089495,
+  "seg": "laundromat",
+  "updated": "2026-08-30T12:51:26"
+ },
+ "ChIJtRI9eOm5woARVl3oVtLFXsE": {
+  "id": "ChIJtRI9eOm5woARVl3oVtLFXsE",
+  "created": "2026-08-30T12:51:26",
+  "status": "rejected",
+  "reason": "",
+  "last_contact": "2026-08-30",
+  "name": "Rocket",
+  "address": "800 N Western Ave, Los Angeles, CA 90029, USA",
+  "lat": 34.0847084,
+  "lng": -118.3089495,
+  "seg": "laundromat",
+  "updated": "2026-08-30T12:51:26"
+ }
+}

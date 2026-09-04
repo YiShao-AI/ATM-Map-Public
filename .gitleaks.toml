@@ -1,0 +1,4 @@
+title = "ATM Map secret-scanning configuration"
+
+[extend]
+useDefault = true
